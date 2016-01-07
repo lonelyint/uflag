@@ -101,11 +101,11 @@ public class DeepIterator<T> implements Iterator<T> {
 ###### (LC - Majority element) Find an element occurs more than n/2 or n/3 times in array
 ###### (LC) Search a 2D sorted array
 ###### (LC) Search for the range
-###### (LC) Roman To Integer
+###### (LC) Roman To Integer / Integer to Roman
 ###### (LC) Text Justification
 ###### (LC) String to integer
 ###### (LC) Insert interval
-###### (LC) Celebrity Problem 
+###### (LC) Celebrity 
 ###### (LC) Build BST from its inorder and post-order
 ###### (LC) First Common Ancestor with parent pointer
 ###### (LC) BST to inoder and postoder array, then array to BST
