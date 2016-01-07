@@ -2,6 +2,7 @@
 ```java
 //5 + ((1 + 2) * 4) − 3
 //5 1 2 + 4 * + 3 −
+```
 
 ###### Valid Number (LC65)
 ```java
@@ -97,7 +98,7 @@ public class DeepIterator<T> implements Iterator<T> {
 	}
 }
 ```
-######
+###### (LC - Majority element) Find an element occurs more than n/2 or n/3 times in array
 
 
 
