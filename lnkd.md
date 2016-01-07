@@ -213,6 +213,25 @@ multiplication of all elements in arr1 except arr1[i]
 就是实现java里面的String.replace(String find, String replace)
 ###### (LC) Min. Window
 ###### (LC) isomorphic
+```java
+public boolean isIsomorphic(String s, String t) {
+    if(s.length()!=t.length()) return false;
+    HashMap<Character, Character> hm = new HashMap<>();
+    //hashset may not be needed, since we could use hm.containsValue()
+    HashSet<Character> hs = new HashSet(); 
+    for(int i=0;i<s.length();i++){
+        char cs = s.charAt(i), ct = t.charAt(i);
+        if(!hm.containsKey(cs)) {
+            if(hs.contains(ct)) return false;
+            hm.put(cs, ct);
+            hs.add(ct);
+        } else {
+            if(hm.get(cs) != ct) return false;        
+        }
+    }
+    return true;
+}
+```
 ###### find the smallest character that is strictly larger than the search character
 ###### 判断2个linkedlist是否在某一点会重合. 0(1) space
 ###### 给一个string，每10个letter一组
