@@ -102,10 +102,113 @@ public class DeepIterator<T> implements Iterator<T> {
 ###### (LC) Search a 2D sorted array
 ###### (LC) Search for the range
 ###### (LC) Roman To Integer / Integer to Roman
+```java
+//roman to integer
+public int romanToInt(String s) {
+    int res = 0;
+    for (int i = s.length() - 1; i >= 0; i--) {
+        char c = s.charAt(i);
+        switch (c) {
+        case 'I':
+            res += (res >= 5 ? -1 : 1);
+            break;
+        case 'V':
+            res += 5;
+            break;
+        case 'X':
+            res += 10 * (res >= 50 ? -1 : 1);
+            break;
+        case 'L':
+            res += 50;
+            break;
+        case 'C':
+            res += 100 * (res >= 500 ? -1 : 1);
+            break;
+        case 'D':
+            res += 500;
+            break;
+        case 'M':
+            res += 1000;
+            break;
+        }
+    }
+    return res;  
+}
+```
+```java
+//integer to roman
+public String intToRoman(int num) {
+    String M[] = {"", "M", "MM", "MMM"};
+    String C[] = {"", "C", "CC", "CCC", "CD", "D", "DC", "DCC", "DCCC", "CM"};
+    String X[] = {"", "X", "XX", "XXX", "XL", "L", "LX", "LXX", "LXXX", "XC"};
+    String I[] = {"", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX"};
+    return M[num/1000] + C[(num%1000)/100] + X[(num%100)/10] + I[num%10];
+}
+```
 ###### (LC) Text Justification
+```java
+public class Solution {
+    public List<String> fullJustify(String[] words, int L) {
+        List<String> list = new LinkedList<String>();
+
+        for (int i = 0, w; i < words.length; i = w) {
+            int len = -1;
+            for (w = i; w < words.length && len + words[w].length() + 1 <= L; w++) {
+                len += words[w].length() + 1;
+            }
+
+            StringBuilder strBuilder = new StringBuilder(words[i]);
+            int space = 1, extra = 0;
+            if (w != i + 1 && w != words.length) { // not 1 char, not last line
+                space = (L - len) / (w - i - 1) + 1;
+                extra = (L - len) % (w - i - 1);
+            }
+            for (int j = i + 1; j < w; j++) {
+                for (int s = space; s > 0; s--) strBuilder.append(' ');
+                if (extra-- > 0) strBuilder.append(' ');
+                strBuilder.append(words[j]);
+            }
+            int strLen = L - strBuilder.length();
+            while (strLen-- > 0) strBuilder.append(' ');
+            list.add(strBuilder.toString());
+        }
+
+        return list;
+    }
+}
+```
 ###### (LC) String to integer
+```java
+public int myAtoi(String str) {
+    int result = 0, i = 0, sign = 1;
+    if(str == null || str.length() == 0)
+        return result;
+    char[] arr = str.toCharArray();
+    while(arr[i]==' ' && i< arr.length)
+        i++;
+    if(i==arr.length)
+        return result;
+    if(arr[i] == '-' || arr[i] == '+'){
+        sign = arr[i] == '-'? -1: 1;
+        i++;
+    }
+    int j = i;
+    for(; j < str.length(); j++){
+        if(arr[j] >'9' || arr[j] <'0')
+            break;
+        if((j > i) && 
+            (Integer.parseInt(str.substring(i, j)) > Integer.MAX_VALUE/10 ||
+            (Integer.parseInt(str.substring(i, j)) == Integer.MAX_VALUE/10 &&
+              (sign == 1 && arr[j]>='7' || sign == -1&& arr[j] >= '8'))))
+            return sign == 1? Integer.MAX_VALUE: Integer.MIN_VALUE;
+    }
+    result = i==j? 0: Integer.parseInt(str.substring(i, j));
+    return result*sign;
+}
+```
 ###### (LC) Insert interval
-###### (LC) Celebrity 
+###### (LC) Celebrity
+
 ###### (LC) Build BST from its inorder and post-order
 ###### (LC) First Common Ancestor with parent pointer
 ###### (LC) Kth element in an array
