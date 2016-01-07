@@ -208,7 +208,13 @@ public int myAtoi(String str) {
 ```
 ###### (LC) Insert interval
 ###### (LC) Celebrity
-
+```java
+int candidate=0;
+for i in [1..n-1] 
+    - if(c[i] knows candicate) continue
+    - else candidate = c[i]
+Another pass to check if candicates knows anyone
+```
 ###### (LC) Build BST from its inorder and post-order
 ###### (LC) First Common Ancestor with parent pointer
 ###### (LC) Kth element in an array
