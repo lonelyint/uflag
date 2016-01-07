@@ -108,7 +108,6 @@ public class DeepIterator<T> implements Iterator<T> {
 ###### (LC) Celebrity 
 ###### (LC) Build BST from its inorder and post-order
 ###### (LC) First Common Ancestor with parent pointer
-###### (LC) BST to inoder and postoder array, then array to BST
 ###### (LC) Kth element in an array
 ###### (LC) Maximum Product Subarray
 ###### Insert/Delete a node in BST (*)
