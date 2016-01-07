@@ -219,6 +219,20 @@ Another pass to check if candicates knows anyone
 ###### (LC) First Common Ancestor with parent pointer
 ###### (LC) Kth element in an array
 ###### (LC) Maximum Product Subarray
+```java
+    //max subarray
+    public int maxSubArray(int[] nums) {
+        int rlt=nums[0], max_so_far=nums[0];
+        for(int i=1;i<nums.length;i++){
+            max_so_far = max_so_far < 0 ? nums[i] : max_so_far+nums[i];
+            rlt = Math.max(max_so_far, rlt);       
+        }    
+        return rlt;
+    }
+    
+    //max product subarray
+    
+```
 ###### Insert/Delete a node in BST (*)
 ###### Intersection and Union of two arrays 
 ```c
