@@ -218,6 +218,54 @@ multiplication of all elements in arr1 except arr1[i]
 ###### 判断2个linkedlist是否在某一点会重合. 0(1) space
 ###### 给一个string，每10个letter一组
 输出所有出现次数超过一次的strings with length of 10. 一定要用rolling hashing做
+```java
+const unsigned PRIME_BASE = 257;
+const unsigned PRIME_MOD = 1000000007;
+
+unsigned hash(const string& s)
+{
+    long long ret = 0;
+    for (int i = 0; i < s.size(); i++)
+    {
+        ret = ret*PRIME_BASE + s[i];
+        ret %= PRIME_MOD; //don't overflow
+    }
+    return ret;
+}
+
+int rabin_karp(const string& needle, const string& haystack)
+{
+    //I'm using long longs to avoid overflow
+    long long hash1 = hash(needle);
+    long long hash2 = 0;
+
+    //you could use exponentiation by squaring for extra speed
+    long long power = 1;
+    for (int i = 0; i < needle.size(); i++)
+        power = (power * PRIME_BASE) % PRIME_MOD;
+
+    for (int i = 0; i < haystack.size(); i++)
+    {
+        //add the last letter
+        hash2 = hash2*PRIME_BASE + haystack[i];
+        hash2 %= PRIME_MOD;
+
+        //remove the first character, if needed
+        if (i >= needle.size())
+        {
+            hash2 -= power * haystack[i-needle.size()] % PRIME_MOD;
+            if (hash2 < 0) //negative can be made positive with mod
+                hash2 += PRIME_MOD;
+        }
+
+        //match?
+        if (i >= needle.size()-1 && hash1 == hash2)
+            return i - (needle.size()-1);
+    }
+
+    return -1;
+}
+```
 ###### (LC) string reverse
 ###### 给定一个undirected graph和一个s节点和一个d节点，判断s和d的距离是否<=3。
 距离定义为s和d之间最短路径上link的数目。如果d是s的邻居，则距离为1。 
