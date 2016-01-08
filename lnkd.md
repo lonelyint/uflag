@@ -100,6 +100,51 @@ public class DeepIterator<T> implements Iterator<T> {
 ```
 ###### (LC - Majority element) Find an element occurs more than n/2 or n/3 times in array
 ###### (LC) Search a 2D sorted array
+```java
+public class Solution {
+    public boolean searchMatrix(int[][] matrix, int target) {
+        int m = matrix.length;
+        int n = matrix[0].length;
+        int s = 0, e = m-1;
+        while(s < e){
+            //this line is very import to break the infinite loop
+            //use (s+e+1)/2 instead of (s+e)/2
+            int mid = (s+e+1)/2; 
+            if(matrix[mid][0] > target) e = mid-1;
+            else s = mid;
+        }
+        
+        if(s>e) return false;
+        
+        int ss = 0, ee = n-1;
+        while(ss <= ee){
+            int mid = (ss+ee)/2;
+            if(matrix[s][mid] < target) ss = mid+1;
+            else if(matrix[s][mid] > target) ee = mid-1;
+            else return true;
+        }
+        
+        return false;
+    }
+}
+```
+```java
+public class Solution {
+    public boolean searchMatrix(int[][] matrix, int target) {
+        int row = 0;
+        int col = matrix[0].length-1;
+        
+        while(row < matrix.length && col >=0){
+            int val = matrix[row][col];
+            if(val < target) row++;
+            else if(val > target) col--;
+            else return true;
+        }
+        
+        return false;
+    }
+}
+```
 ###### (LC) Search for the range
 ###### (LC) Roman To Integer / Integer to Roman
 ```java
@@ -422,6 +467,57 @@ public class Solution {
 ###### (LC) Search in 2D matrix I/II
 ###### Design a data structure supporting O(1) add, remove, removeRandom
 ###### (LC) max points on a line
+```c++
+class Solution {
+public:
+    int maxPoints(vector<Point> &points) {
+
+        if(points.size()<2) return points.size();
+
+        int result=0;
+
+        for(int i=0; i<points.size(); i++) {
+
+            map<pair<int, int>, int> lines;
+            int localmax=0, overlap=0, vertical=0;
+
+            for(int j=i+1; j<points.size(); j++) {
+
+                if(points[j].x==points[i].x && points[j].y==points[i].y) {
+
+                    overlap++;
+                    continue;
+                }
+                else if(points[j].x==points[i].x) vertical++;
+                else {
+
+                    int a=points[j].x-points[i].x, b=points[j].y-points[i].y;
+                    int gcd=GCD(a, b);
+
+                    a/=gcd;
+                    b/=gcd;
+
+                    lines[make_pair(a, b)]++;
+                    localmax=max(lines[make_pair(a, b)], localmax);
+                }
+
+                localmax=max(vertical, localmax);
+            }
+
+            result=max(result, localmax+overlap+1);
+        }
+
+        return result;
+    }
+
+private:
+    int GCD(int a, int b) {
+
+        if(b==0) return a;
+        else return GCD(b, a%b);
+    }
+};
+```
 ###### (LC) 给你一个BST的pre-order traverse的结果，让你返回in-order traverse的结果
 ###### (LC) Tree level order traversal
 ```c++
