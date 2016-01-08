@@ -218,6 +218,34 @@ Another pass to check if candicates knows anyone
 ###### (LC) Build BST from its inorder and post-order
 ###### (LC) First Common Ancestor with parent pointer
 ###### (LC) Kth element in an array
+```java
+public class Solution {
+    public int findKthLargest(int[] nums, int k) {
+        return helper(nums, k, 0, nums.length-1);
+    }
+    
+    private int helper(int[] nums, int k, int s, int e){
+        int j=s, v=nums[s];
+        swap(nums, s, e);
+        for(int i=s;i<e;i++){
+            if(nums[i]>v) {
+                swap(nums, j, i);
+                j++;
+            }
+        }
+
+        if(j-s+1==k) return nums[e]; 
+        else if(j-s+1>k) return helper(nums, k, s, j-1);
+        else return helper(nums, k-(j-s+1), j, e-1);
+    }
+    
+    private void swap(int[] nums, int i, int j){
+        int tmp = nums[i];
+        nums[i]=nums[j];
+        nums[j]=tmp;
+    }
+}
+```
 ###### (LC) Maximum Product Subarray
 ```java
     //max subarray
