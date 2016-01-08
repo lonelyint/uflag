@@ -216,6 +216,58 @@ for i in [1..n-1]
 Another pass to check if candicates knows anyone
 ```
 ###### (LC) Build BST from its inorder and post-order
+```java
+public class Solution {
+    private TreeNode helper(int[] postorder, int[] inorder, int ps, int pe, int is, int ie){
+        if(ps == pe) return new TreeNode(postorder[ps]);
+        
+        int pivot = postorder[pe];
+        TreeNode tn = new TreeNode(pivot);
+        
+        int i;
+        for(i = is; i <= ie; i++){
+            if(inorder[i] == pivot) break;
+        }
+        
+        if(i > is) tn.left = helper(postorder, inorder, ps, ps+(i-is)-1, is, i-1);
+        if(i < ie) tn.right = helper(postorder, inorder, ps+(i-is), pe-1, i+1, ie);
+        
+        return tn;
+    }
+    
+    public TreeNode buildTree(int[] inorder, int[] postorder) {
+        if(inorder.length == 0) return null;
+        return helper(postorder, inorder, 0, postorder.length-1, 0, inorder.length-1);
+    }
+}
+```
+```java
+//inorder and pre order
+public class Solution {
+    private TreeNode helper(int[] preorder, int[] inorder, int ps, int pe, int is, int ie){
+        if(ps == pe) return new TreeNode(preorder[ps]);
+        
+        int pivot = preorder[ps];
+        
+        TreeNode tn = new TreeNode(pivot);
+        int i;
+        for(i = is; i <= ie; i++){
+            if(inorder[i] == pivot) break;
+        }
+        
+        if(i > is) tn.left = helper(preorder, inorder, ps+1, ps+(i-is), is, i-1);
+        if(i < ie) tn.right = helper(preorder, inorder, ps+(i-is)+1, pe, i+1, ie);
+        
+        return tn;
+    }
+    
+    public TreeNode buildTree(int[] preorder, int[] inorder) {
+        if(preorder.length == 0) return null;
+        
+        return helper(preorder, inorder, 0, preorder.length - 1, 0, inorder.length - 1);
+    }
+}
+```
 ###### (LC) First Common Ancestor with parent pointer
 ###### (LC) Kth element in an array
 ```java
