@@ -425,6 +425,43 @@ int rabin_karp(const string& needle, const string& haystack)
 }
 ```
 ###### (LC) string reverse
+```java
+public class Solution {
+    
+    private char[] reverse(char[] cs, int s, int e){
+        int ss = s;
+        int ee = e;
+        while(ss < ee){
+            char tmp = cs[ss];
+            cs[ss++] = cs[ee];
+            cs[ee--] = tmp;
+        }
+        
+        return cs;
+    }
+    
+    public String reverseWords(String s) {
+        if(s.length() == 0) return s;
+        
+        String ss = " " + s;
+        char[] cs = reverse(ss.toCharArray(), 0, ss.length()-1);
+        int start=0, end=0;
+        for(int i=0;i<cs.length;i++){
+            if(cs[i] != ' '){
+                cs[end++] = cs[i];
+            } else{
+                if(i>0 && (cs[i-1] != ' ')){
+                    reverse(cs, start, end-1);
+                    cs[end++] = ' ';
+                    start = end;
+                }
+            }
+        }
+        
+        return new String(cs, 0, end > 0  ? end-1: end);
+    }
+}
+```
 ###### 给定一个undirected graph和一个s节点和一个d节点，判断s和d的距离是否<=3。
 距离定义为s和d之间最短路径上link的数目。如果d是s的邻居，则距离为1。 
 注意，这个undirected graph使用adjacent array来表示一个节点的所有neighbors，并
