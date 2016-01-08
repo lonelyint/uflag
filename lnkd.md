@@ -231,7 +231,24 @@ Another pass to check if candicates knows anyone
     }
     
     //max product subarray
-    
+    public int maxProduct(int[] nums) {
+        int min_so_far = nums[0];
+        int max_so_far = nums[0];
+        int rlt = nums[0];
+        
+        for(int i = 1;i<nums.length;i++){
+            int tmp = nums[i];
+            
+            //t1, t2 here is to save the previous value
+            //since min_so_far and max_so_far will be updated during computation
+            int t1 = min_so_far;
+            int t2 = max_so_far;
+            min_so_far = Math.min(Math.min(t2 * tmp, t1 * tmp), tmp);
+            max_so_far = Math.max(Math.max(t2 * tmp, t1 * tmp), tmp);
+            rlt = rlt > max_so_far ? rlt : max_so_far;
+        }
+        return rlt;
+    }
 ```
 ###### Insert/Delete a node in BST (*)
 ###### Intersection and Union of two arrays 
