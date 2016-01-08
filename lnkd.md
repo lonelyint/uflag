@@ -417,6 +417,28 @@ class input_stream
 ###### Shuffle Card in place
 ###### (LC) Word Ladder
 ###### (LC) Word Distance
+```java
+//method without using hashing map
+public int shortestWordDistance(String[] words, String word1, String word2) {
+        int p1 = -1, p2 = -1, distance = words.length;
+        
+        for(int i = 0; i<words.length; i++){
+            if(words[i].equals(word1)){
+                p1 = i;
+                if(p1 != -1 && p2 != -1){
+                    distance = (p1!=p2) ? Math.min(distance, Math.abs(p1-p2)): distance;
+                }
+            }
+            if(words[i].equals(word2)){
+                p2 = i;
+                if(p1 != -1 && p2 != -1){
+                    distance = (p1!=p2) ? Math.min(distance, Math.abs(p1-p2)): distance;
+                }
+            }
+        }
+        return distance;
+    }
+```
 ###### Flatten double linked list with parent/child pointers
 一个双向链表，带头尾指针，每个节点可能都有父节点和子节点，每个父子节点又是
 一个链表。要求把它拍扁，顺序随意。
