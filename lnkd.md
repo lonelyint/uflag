@@ -676,6 +676,12 @@ public class Solution {
 且每个节点最多有n个neighbors。每个节点都有一个Idx，并且每个节点的adjacent 
 array都是sorted。例如1有邻居2和3，那么1的adjacent array是[2,3](sorted)
 直接的BSF解法时间复杂度是O(n^3)。要求设计Solution是时间 O(n^2)。
+```
+先搜索source点 distance 为2的点集合 O(N^2)，然后用哈希判断
+是否和destination点 的O（N） 邻居集合有交集， 复杂度 O(N^2)
+这个距离要求是三还是挺好的，要是距离是五什么的就需要双向搜索，代码就很变得很
+难了。 
+```
 ###### 设计一个iterator class处理文件line by line
 ###### given a stream of data and a sliding window, implement put(), getAverage()
 考虑multithreading的情况
