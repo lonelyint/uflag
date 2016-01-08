@@ -330,7 +330,6 @@ class input_stream
 一点一点说明白，才证明是他理解有问题，幸好还算坚持，不然就被他带沟里去了。
 当然这个算法有更好的解，既然不要求顺序，而且有头尾指针，每次把父子链表接到尾
 巴后面就可以了。连递归都省了。
-###### (LC) Level order tree traversal
 ###### All factors of a number
 ###### (LC) DNA Sequence
 ###### (LC) Search in 2D matrix I/II
@@ -338,11 +337,140 @@ class input_stream
 ###### (LC) max points on a line
 ###### (LC) 给你一个BST的pre-order traverse的结果，让你返回in-order traverse的结果
 ###### (LC) Tree level order traversal
+```c++
+vector<vector<int>> ret;
+
+void buildVector(TreeNode *root, int depth)
+{
+    if(root == NULL) return;
+    if(ret.size() == depth)
+        ret.push_back(vector<int>());
+
+    ret[depth].push_back(root->val);
+    buildVector(root->left, depth + 1);
+    buildVector(root->right, depth + 1);
+}
+
+vector<vector<int> > levelOrder(TreeNode *root) {
+    buildVector(root, 0);
+    return ret;
+}
+```
+```java
+public class Solution {
+    public List<List<Integer>> levelOrder(TreeNode root) {
+        Queue<TreeNode> queue = new LinkedList<TreeNode>();
+        List<List<Integer>> wrapList = new LinkedList<List<Integer>>();
+
+        if(root == null) return wrapList;
+
+        queue.offer(root);
+        while(!queue.isEmpty()){
+            int levelNum = queue.size();
+            List<Integer> subList = new LinkedList<Integer>();
+            for(int i=0; i<levelNum; i++) {
+                if(queue.peek().left != null) queue.offer(queue.peek().left);
+                if(queue.peek().right != null) queue.offer(queue.peek().right);
+                subList.add(queue.poll().val);
+            }
+            wrapList.add(subList);
+        }
+        return wrapList;
+    }
+}
+```
 ###### (LC) Edit distance
+```java
+public class Solution {
+    public int minDistance(String word1, String word2) {
+        int n1 = word1.length();
+        int n2 = word2.length();
+        int[][] wk = new int[n1+1][n2+1];
+        
+        for(int i=0;i<=n1;i++) wk[i][0] = i;
+        for(int j=0;j<=n2;j++) wk[0][j] = j;
+        
+        for(int i=1;i<=n1;i++){
+            for(int j=1;j<=n2;j++){
+                if(word1.charAt(i-1) == word2.charAt(j-1)){
+                    wk[i][j] = wk[i-1][j-1];
+                } else{
+                    wk[i][j] = Math.min(wk[i-1][j-1], Math.min(wk[i][j-1], wk[i-1][j]))+1;
+                }
+            }
+        }
+        
+        return wk[n1][n2];
+    }
+}
+```
 ###### Find triangle in an array
 Given an array of integers, find out a triple of integers such that
 they form a triangle. i.e. given a,b,c from the array, a +b >c, b +c >a, a 
 +c >b, 返回任何三个就可以了。 
+```java
+// Java program to count number of triangles that can be
+// formed from given array
+import java.io.*;
+import java.util.*;
+ 
+class CountTriangles
+{
+    // Function to count all possible triangles with arr[]
+    // elements
+    static int findNumberOfTriangles(int arr[])
+    {
+        int n = arr.length;
+        // Sort the array elements in non-decreasing order
+        Arrays.sort(arr);
+ 
+        // Initialize count of triangles
+        int count = 0;
+ 
+        // Fix the first element.  We need to run till n-3 as
+        // the other two elements are selected from arr[i+1...n-1]
+        for (int i = 0; i < n-2; ++i)
+        {
+            // Initialize index of the rightmost third element
+            int k = i + 2;
+ 
+            // Fix the second element
+            for (int j = i+1; j < n; ++j)
+            {
+                /* Find the rightmost element which is smaller
+                   than the sum of two fixed elements
+                   The important thing to note here is, we use
+                   the previous value of k. If value of arr[i] +
+                   arr[j-1] was greater than arr[k], then arr[i] +
+                   arr[j] must be greater than k, because the
+                   array is sorted. */
+                while (k < n && arr[i] + arr[j] > arr[k])
+                    ++k;
+ 
+               /* Total number of possible triangles that can be
+                  formed with the two fixed elements is k - j - 1.
+                  The two fixed elements are arr[i] and arr[j].  All
+                  elements between arr[j+1] to arr[k-1] can form a
+                  triangle with arr[i] and arr[j]. One is subtracted
+                  from k because k is incremented one extra in above
+                  while loop. k will always be greater than j. If j
+                  becomes equal to k, then above loop will increment
+                  k, because arr[k] + arr[i] is always/ greater than
+                  arr[k] */
+                count += k - j - 1;
+            }
+        }
+        return count;
+    }
+ 
+    public static void main (String[] args)
+    {
+        int arr[] = {10, 21, 22, 100, 101, 200, 300};
+        System.out.println("Total number of triangles is " +
+                            findNumberOfTriangles(arr));
+    }
+}
+```
 ###### Implement addInterval(start, end) and getcoverage()
 ```java
 public interface Intervals {
@@ -504,9 +632,52 @@ array都是sorted。例如1有邻居2和3，那么1的adjacent array是[2,3](sor
 都在讨论multi threading的实现，我提到了read write lock，和三种fairness 
 policy，不过他俩都是一脸茫然，好像他们只知道read write lock，但不知道
 fairness这回事，挺奇怪的。
-###### 数组排序， 排成a1<a2>a3<a4>a5.
+###### (LC) Wiggle Sort
+数组排序， 排成a1<a2>a3<a4>a5.
+```java
+public class Solution {
+    public void wiggleSort(int[] nums) {
+        
+        for(int i=1;i<nums.length;i++){
+            
+            if(i%2==1&&nums[i]<nums[i-1]){
+                int tmp= nums[i];
+                nums[i] = nums[i-1];
+                nums[i-1] = tmp;
+            }
+            else if(i%2==0&&nums[i]>nums[i-1]){
+                int tmp= nums[i];
+                nums[i] = nums[i-1];
+                nums[i-1] = tmp;
+            }
+        }
+        
+    }
+}
+```
 ###### (LC) Max Sum Path in Binary Tree
-
+```java
+public class Solution {
+    int max;
+    
+    public int maxPathSum(TreeNode root) {
+        max = Integer.MIN_VALUE;
+        maxSoFar(root);
+        return max;
+    }
+    
+    public int maxSoFar(TreeNode root){
+        if(root == null) return 0;
+        
+        int left = Math.max(0, maxSoFar(root.left));
+        int right = Math.max(0, maxSoFar(root.right));
+        
+        max = Math.max(max, left+right+root.val);
+        return left > right ? left+root.val : right+root.val;
+    }
+    
+}
+```
 
 
 
