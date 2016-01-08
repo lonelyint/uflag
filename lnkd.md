@@ -382,6 +382,41 @@ class input_stream
 一点一点说明白，才证明是他理解有问题，幸好还算坚持，不然就被他带沟里去了。
 当然这个算法有更好的解，既然不要求顺序，而且有头尾指针，每次把父子链表接到尾
 巴后面就可以了。连递归都省了。
+```java
+public class Solution {
+    public void flattenList(ListNode head) {
+        if (head == null) {
+            return;
+        }
+         
+        // Step 1: get the tail of the list
+        ListNode tail = head;
+        while (tail.next != null) {
+            tail = tail.next;
+        }
+         
+        // Step 2: iterate from the first layer. If a node has a child, put it to
+        // the end of hte list, and update the tail pointer
+        ListNode p = head;
+         
+        while (p != tail) {
+            if (p.child != null) {
+                ListNode childHead = p.child;
+                tail.next = chiidHead;
+                 
+                // Updat the tail
+                while (tail.next != null) {
+                    tail = tail.next;
+                }
+                 
+                p.child = null;
+            }
+             
+            p = p.next;
+        }
+    }
+}
+```
 ###### All factors of a number
 ###### (LC) DNA Sequence
 ###### (LC) Search in 2D matrix I/II
