@@ -190,3 +190,18 @@ public void convert(TreeNode root, TreeNode prev, TreeNode head){
 ###### Weighted random selection
 ###### BT Level Traverse
 ###### Buy and Sell Stock 1234
+###### Using Stack to implement a Queue (vise versa)
+###### 3-sum (Hashtable)
+###### 给a list of segment，求出与其他segment相交最多的segment
+###### mplement ／ using ＋
+###### Trie and w**d
+###### climbing stairs
+###### 两个字符串，计算长度至少为k的公共子字符串个数
+###### Linked List sort
+###### 判断二叉树是否为合法的二叉排序树
+###### 输入一个数组，其中有n个非负整数  
+求将它们重新排列顺序之后，连在一起所能组成的最大数字
+###### 9,8,3,8,8,5,2,9
+找出这串数字中长度为‘k’的subsequence（不是subarray, 我专门问了，就是subsequence，不一定挨着的元素序列），使得这串subsequence的和最大
+Edit Distance
+###### find k closest points to a given point in 2D plane
