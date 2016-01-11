@@ -121,4 +121,18 @@ public class Solution {
 ```
 ###### Parse a formula String
 ###### Convert Binary Tree to double linked list
+```java
+public void convert(TreeNode root, TreeNode prev, TreeNode head){
+	if(root==null) return;
+	convert(root.left, prev, head);
+	root.left = prev;
+	if(prev!=null)prev.right = root;
+	else head = root;
+	TreeNode right = root.right;
+	head.left = root;
+	root.right = head;
+	prev = root;
+	convert(right, prev, head);
+}
+```
 ###### 
