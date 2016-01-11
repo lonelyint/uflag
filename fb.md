@@ -122,6 +122,7 @@ public class Solution {
 ###### Parse a formula String
 ```c++
 //leetcode 224 (basic calculator)
+//http://www.fgdsb.com/2015/01/08/parse-formula/
 double evaluate(const string& f, double x_val) {
     double sum_y_left = 0, sum_y_right = 0;
     double sum_num_left = 0, sum_num_right = 0;
