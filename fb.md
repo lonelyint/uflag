@@ -47,7 +47,9 @@ public class Solution {
     }
 }
 ```
-###### Randomly return the index of max elements in an array
+###### Randomly return the index of max elements in an array  
+http://www.1point3acres.com/bbs/thread-123655-1-1.html  
+http://www.1point3acres.com/bbs/thread-120864-3-1.html
 ```java
 //reservoir sampling
 public int reservSampling(int[] nums){
