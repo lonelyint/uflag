@@ -71,5 +71,48 @@ public int reservSampling(int[] nums){
 	return rt;
 }
 ```
-###### 
+###### Binary Tree Vertical Traversal
+```java
+class ZipNode{
+	List<Integer> val;
+	ZipNode prev, next;
+	public ZipNode(){
+		val = new ArrayList<>();
+	}
+}
 
+public class Solution {
+	public void verticalPrint(TreeNode root){
+		ZipNode z = new ZipNode();
+		helper(root, z);
+		ZipNode curr = z;
+		while(curr.prev !=null){
+			curr = curr.prev;
+		}
+		while(curr != null){
+			System.out.println(curr.val);
+			curr = curr.next;
+		}
+	}
+    
+	private void helper(TreeNode root, ZipNode z){
+		z.val.add(root.val);
+		if(root.left != null) {
+			if(z.prev == null){
+				ZipNode p = new ZipNode();
+				z.prev = p;
+				p.next = z;
+			}
+			helper(root.left, z.prev);
+		}
+		if(root.right != null) {
+			if(z.next == null){
+				ZipNode r = new ZipNode();
+				z.next = r;
+				r.prev = z;
+			}
+			helper(root.right, z.next);
+		}
+	}
+}
+```
