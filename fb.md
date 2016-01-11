@@ -120,6 +120,10 @@ public class Solution {
 ```java
 ```
 ###### Parse a formula String
+```java
+//leetcode 224 (basic calculator)
+
+```
 ###### Convert Binary Tree to double linked list
 ```java
 public void convert(TreeNode root, TreeNode prev, TreeNode head){
@@ -135,4 +139,6 @@ public void convert(TreeNode root, TreeNode prev, TreeNode head){
 	convert(right, prev, head);
 }
 ```
-###### 
+###### Find Peak
+###### All root to leaf path
+
