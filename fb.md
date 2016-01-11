@@ -47,5 +47,26 @@ public class Solution {
     }
 }
 ```
+###### Randomly return the index of max elements in an array
+```java
+//reservoir sampling
+public int reservSampling(int[] nums){
+	int max=nums[0];
+	int cnt=1;
+	int rt = 0;
+	Random rand = new Random();
+	for(int i=1;i<nums.length;i++){
+		if(nums[i]==max){
+			cnt++;
+			rt = (rand.nextInt(cnt)+1==cnt) ? i : rt;
+		} else if(nums[i] > max){
+			max=nums[i];
+			cnt=1;
+			rt = i;
+		}
+	}
+	return rt;
+}
+```
 ###### 
 
