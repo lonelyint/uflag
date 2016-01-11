@@ -192,6 +192,23 @@ public void convert(TreeNode root, TreeNode prev, TreeNode head){
 ###### Buy and Sell Stock 1234
 ###### Using Stack to implement a Queue (vise versa)
 ###### 3-sum (Hashtable)
+```java
+  // Complexity - O(n^2), Space Complexity - O(n^2)
+    private int[] findTriple_3(int[] A) {
+        Map<Integer, int[]> map = new HashMap<Integer, int[]>();
+        for (int i = 0, l = A.length; i < l; i++) {
+            map.clear();
+            for (int j = i + 1; j < l; j++) {
+                if (map.containsKey(A[j])) {
+                    int[] pair = map.get(A[j]);
+                    return new int[]{pair[0], pair[1], A[j]};
+                } else
+                    map.put(-A[i] - A[j], new int[]{A[i], A[j]});
+            }
+        }
+        return null;
+    }
+```
 ###### 给a list of segment，求出与其他segment相交最多的segment
 ###### mplement ／ using ＋
 ###### Trie and w**d
