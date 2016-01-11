@@ -116,6 +116,30 @@ public class Solution {
 	}
 }
 ```
+```java
+public void printTopDown(TreeNode root){
+	TreeMap<Integer, List<TreeNode>> hm = new TreeMap<>();
+	helper(root, hm, 0);
+	for(Map.Entry<Integer, List<TreeNode>> e : hm.entrySet()){
+		System.out.println(e.getValue());
+	}
+}
+
+private void helper(TreeNode root, TreeMap<Integer, List<TreeNode>> hm, int col){
+	if(root == null) return;
+	if(hm.containsKey(col)) {
+		List<TreeNode> lt = hm.get(col);
+		lt.add(root);
+	} else {
+		List<TreeNode> lt = new ArrayList<>();
+		lt.add(root);
+		hm.put(col, lt);
+	}
+	
+	helper(root.left, hm, col-1);
+	helper(root.right, hm, col+1);
+}
+```
 ###### Divide two integers without multiplication, division and mod operator
 ```java
 ```
