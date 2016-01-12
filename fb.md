@@ -247,5 +247,29 @@ public void convert(TreeNode root, TreeNode prev, TreeNode head){
 求将它们重新排列顺序之后，连在一起所能组成的最大数字
 ###### 9,8,3,8,8,5,2,9
 找出这串数字中长度为‘k’的subsequence（不是subarray, 我专门问了，就是subsequence，不一定挨着的元素序列），使得这串subsequence的和最大
-Edit Distance
+###### Edit Distance
+```java
+public class Solution {
+    public int minDistance(String word1, String word2) {
+        int n1 = word1.length();
+        int n2 = word2.length();
+        int[][] wk = new int[n1+1][n2+1];
+        
+        for(int i=0;i<=n1;i++) wk[i][0] = i;
+        for(int j=0;j<=n2;j++) wk[0][j] = j;
+        
+        for(int i=1;i<=n1;i++){
+            for(int j=1;j<=n2;j++){
+                if(word1.charAt(i-1) == word2.charAt(j-1)){
+                    wk[i][j] = wk[i-1][j-1];
+                } else{
+                    wk[i][j] = Math.min(wk[i-1][j-1], Math.min(wk[i][j-1], wk[i-1][j]))+1;
+                }
+            }
+        }
+        
+        return wk[n1][n2];
+    }
+}
+```
 ###### find k closest points to a given point in 2D plane
