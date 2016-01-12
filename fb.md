@@ -245,6 +245,9 @@ public void convert(TreeNode root, TreeNode prev, TreeNode head){
 ```
 ###### 输入一个数组，其中有n个非负整数  
 求将它们重新排列顺序之后，连在一起所能组成的最大数字
+```
+The idea is to use any comparison based sorting algorithm. In the used sorting algorithm, instead of using the default comparison, write a comparison function myCompare() and use it to sort numbers. Given two numbers X and Y, how should myCompare() decide which number to put first – we compare two numbers XY (Y appended at the end of X) and YX (X appended at the end of Y). If XY is larger, then X should come before Y in output, else Y should come before. For example, let X and Y be 542 and 60. To compare X and Y, we compare 54260 and 60542. Since 60542 is greater than 54260, we put Y first.
+```
 ###### 9,8,3,8,8,5,2,9
 找出这串数字中长度为‘k’的subsequence（不是subarray, 我专门问了，就是subsequence，不一定挨着的元素序列），使得这串subsequence的和最大
 ###### Edit Distance
