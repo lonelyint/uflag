@@ -194,7 +194,7 @@ double evaluate(const string& f, double x_val) {
     return (sum_num_right - sum_num_left) / (sum_y_left - sum_y_right);
 }
 ```
-###### Convert Binary Tree to double linked list
+###### Convert Binary Tree to double linked list (how about single linked list?)
 ```java
 public void convert(TreeNode root, TreeNode prev, TreeNode head){
 	if(root==null) return;
