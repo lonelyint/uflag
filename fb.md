@@ -1,5 +1,9 @@
 ###### Flatten multi-layer linked list
-
+###### Subset II
+###### First Good/Bad Version
+###### Valid Palindrom
+###### Minimum-window-substring with set
+###### 
 ###### Add Binary
 ```java
 public class Solution {
