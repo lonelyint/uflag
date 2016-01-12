@@ -3,7 +3,25 @@
 ###### First Good/Bad Version
 ###### Valid Palindrom
 ###### Minimum-window-substring with set
-###### 
+###### Reverse words in a string
+###### Insert Interval / Total Interval Time
+###### Monster
+finding ali baba
+就是ali baba是个怪兽，他可能在[0，1, ..., numCaves-1]出现，他每隔一天就要换
+一个地方，但他每次只能移左右一格。
+然后给你一个strategy[]数组，数组里面是猜测每天ali baba的位置。如果里面有一个
+猜中了，这个strategy就是正确的
+问题就是让你写一个判断函数 alibaba(int numCaves, int[] strategy)来判别这个
+strategy数组是不是稳赢的策略。写完后问时间复杂度，然后问了下大概怎么样可以优
+化～～～
+http://www.1point3acres.com/bbs/forum.php?mod=viewthread&tid=135384&extra=page%3D1%26filter%3Dsortid%26sortid%3D311%26searchoption%5B3046%5D%5Bvalue%5D%3D2%26searchoption%5B3046%5D%5Btype%5D%3Dradio%26sortid%3D311
+###### One Edit distance with variation
+http://www.1point3acres.com/bbs/forum.php?mod=viewthread&tid=121661&extra=page%3D1%26filter%3Dsortid%26sortid%3D311%26searchoption%255B3046%255D%255Bvalue%255D%3D2%26searchoption%255B3046%255D%255Btype%255D%3Dradio&page=2
+###### ThreeSum
+先是unique numbers， 然后followup存在duplicate的情况
+###### Longest Conq. char
+http://www.careercup.com/question?id=5096352075743232
+###### Word Break
 ###### Add Binary
 ```java
 public class Solution {
